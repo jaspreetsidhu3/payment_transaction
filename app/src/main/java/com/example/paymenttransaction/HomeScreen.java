@@ -22,10 +22,13 @@ public class HomeScreen extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_baseline_account_balance_24));
         MyPageViewerAdapter myPageViewerAdapter=new MyPageViewerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.setAdapter(myPageViewerAdapter);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
+                viewPager.getAdapter().notifyDataSetChanged();
+
+
             }
 
             @Override
@@ -38,7 +41,7 @@ public class HomeScreen extends AppCompatActivity {
 
             }
         });
-        viewPager.setAdapter(myPageViewerAdapter);
+
     }
 
     public void init_view() {

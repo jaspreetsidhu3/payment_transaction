@@ -40,4 +40,8 @@ public class MyPageViewerAdapter extends FragmentPagerAdapter {
         return size;
     }
 
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
+    }
 }

@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="match_parent"
         android:padding="19dp"
         android:id="@+id/linearlayout"
         android:orientation="vertical"
@@ -18,26 +18,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Net Balance"
+            android:layout_gravity="center_horizontal"
             style="@style/TextAppearance.AppCompat.Small"
             ></TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Amount"
+            android:layout_gravity="center_horizontal"
+            android:padding="40dp"
+            android:id="@+id/bankamount"
             android:paddingTop="19dp"
             android:textStyle="bold"
-
             style="@style/TextAppearance.AppCompat.Large"
             ></TextView>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Previous transaction"
+            android:paddingTop="19dp"
+            android:id="@+id/header"
+            style="@style/TextAppearance.AppCompat.Small"
+            ></TextView>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            android:layout_marginTop="12dp"
+            android:id="@+id/recylerview"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            ></ListView>
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/linearlayout"
-        android:layout_marginTop="12dp"
-        android:id="@+id/recylerview"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        ></androidx.recyclerview.widget.RecyclerView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

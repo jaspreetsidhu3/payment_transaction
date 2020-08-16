@@ -26,6 +26,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class AddDialogFragment extends AppCompatDialogFragment {
     private TextView textamount;
@@ -38,62 +42,65 @@ public class AddDialogFragment extends AppCompatDialogFragment {
     AlertDialog.Builder builder;
     View view;
     private String txtamount;
+
     public AddDialogFragment(String textamount) {
-        txtamount=textamount;
+        txtamount = textamount;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-         builder = new AlertDialog.Builder(getContext());
-         view = LayoutInflater.from(getContext()).inflate(R.layout.adddialogfragment, null);
-            init();
-         creating_dialogview();
+        builder = new AlertDialog.Builder(getContext());
+        view = LayoutInflater.from(getContext()).inflate(R.layout.adddialogfragment, null);
+        init();
+        creating_dialogview();
 
-            textamount.setText(txtamount);
-         return builder.create();
+        textamount.setText(txtamount);
+        return builder.create();
     }
-    public void creating_dialogview(){
+
+    public void creating_dialogview() {
         builder.setView(view)
                 .setTitle("Fill transaction details")
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SharedPreferences sharedPreferences=getContext().getSharedPreferences("id_generator", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor=sharedPreferences.edit();
-                        String key=sharedPreferences.getString("file_created","-1");
+                        SharedPreferences sharedPreferences = getContext().getSharedPreferences("id_generator", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        String key = sharedPreferences.getString("file_created", "-1");
                         assert key != null;
-                        if(key.equals("-1")){
-                            Log.d("test","-1");
-                        }
-                        else{
-                            count=Integer.parseInt(key);
-                            Toast.makeText(getContext(),""+count,Toast.LENGTH_SHORT).show();
-                            editor.putString("file_created",String.valueOf(++count));
+                        if (key.equals("-1")) {
+                            Log.d("test", "-1");
+                        } else {
+                            count = Integer.parseInt(key);
+                            editor.putString("file_created", String.valueOf(++count));
                             editor.apply();
                         }
-                        String paymenttype=null;
-                        if(radioPay.isChecked()){
-                            paymenttype="Pay";
+                        String paymenttype = null;
+                        if (radioPay.isChecked()) {
+                            paymenttype = "Paid";
                         }
-                        if(radioRecieve.isChecked()){
-                            paymenttype="Recieved";
+                        if (radioRecieve.isChecked()) {
+                            paymenttype = "Recieved";
                         }
-                        String tofrom=edittofrom.getText().toString();
-                        String title=edittitle.getText().toString();
-                        String desc=editdescription.getText().toString();
+                        String tofrom = edittofrom.getText().toString();
+                        String title = edittitle.getText().toString();
+                        String desc = editdescription.getText().toString();
 
-                        FileOutputStream fileOutputStream= null;
+                        FileOutputStream fileOutputStream = null;
                         try {
-                            fileOutputStream = getContext().openFileOutput(count+".txt", Context.MODE_PRIVATE);
+                            Date c = Calendar.getInstance().getTime();
+                            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+                            String formattedDate = df.format(c);
+                            fileOutputStream = getContext().openFileOutput(formattedDate+" ->  "+paymenttype + " " + txtamount + "rs.txt", Context.MODE_PRIVATE);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }
-                        String data="Title = "+title +"\nAmount paid = "+txtamount+"\nto/from = "+tofrom+"\n description = "+desc;
+                        String data = "Title = " + title + "\nAmount paid = " + txtamount + "\nto/from = " + tofrom + "\n description = " + desc;
                         try {
                             assert fileOutputStream != null;
                             fileOutputStream.write(data.getBytes());
-                            Toast.makeText(getContext(),""+data,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "" + data, Toast.LENGTH_SHORT).show();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -111,13 +118,14 @@ public class AddDialogFragment extends AppCompatDialogFragment {
             }
         });
     }
-    public void init(){
-        textamount=view.findViewById(R.id.passamount);
-        radioPay=view.findViewById(R.id.pay);
-        radioRecieve=view.findViewById(R.id.recieve);
-        edittofrom=view.findViewById(R.id.tofrom);
-        edittitle=view.findViewById(R.id.wanttoaddtitle);
-        editdescription=view.findViewById(R.id.wanttoadddescription);
+
+    public void init() {
+        textamount = view.findViewById(R.id.passamount);
+        radioPay = view.findViewById(R.id.pay);
+        radioRecieve = view.findViewById(R.id.recieve);
+        edittofrom = view.findViewById(R.id.tofrom);
+        edittitle = view.findViewById(R.id.wanttoaddtitle);
+        editdescription = view.findViewById(R.id.wanttoadddescription);
     }
 }
 
