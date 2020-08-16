@@ -21,7 +21,6 @@ public class HomeScreen extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_baseline_account_balance_wallet_24));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_baseline_account_balance_24));
         MyPageViewerAdapter myPageViewerAdapter=new MyPageViewerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
-
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
