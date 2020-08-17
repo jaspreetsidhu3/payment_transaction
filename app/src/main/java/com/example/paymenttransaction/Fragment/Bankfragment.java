@@ -1,6 +1,8 @@
 package com.example.paymenttransaction.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +37,7 @@ public class Bankfragment extends Fragment {
 
         view = LayoutInflater.from(getContext()).inflate(R.layout.bankfragment, null);
         init();
-
+        creating_sharedpreference();
         final File file = getContext().getFilesDir();
         final File file1[] = file.listFiles();
         filelinks=new ArrayList();
@@ -73,6 +75,22 @@ public class Bankfragment extends Fragment {
     public void init() {
         textbankamount = view.findViewById(R.id.bankamount);
         listView = view.findViewById(R.id.recylerview);
+    }
+    public void creating_sharedpreference(){
+        SharedPreferences sharedPreferences=getContext().getSharedPreferences("bankbalance", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        String netamount=sharedPreferences.getString("netbalance","-1");
+        assert netamount != null;
+        if(netamount.equals("-1")){
+            editor.putString("netbalance","0");
+            textbankamount.setText(netamount);
+
+        }
+        else{
+            textbankamount.setText(netamount);
+        }
+
+        editor.apply();
     }
 
 

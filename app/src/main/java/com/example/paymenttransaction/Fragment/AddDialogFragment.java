@@ -39,6 +39,7 @@ public class AddDialogFragment extends AppCompatDialogFragment {
     private EditText edittitle;
     private EditText editdescription;
     int count;
+    int payment_type=0;
     AlertDialog.Builder builder;
     View view;
     private String txtamount;
@@ -54,7 +55,6 @@ public class AddDialogFragment extends AppCompatDialogFragment {
         view = LayoutInflater.from(getContext()).inflate(R.layout.adddialogfragment, null);
         init();
         creating_dialogview();
-
         textamount.setText(txtamount);
         return builder.create();
     }
@@ -79,36 +79,46 @@ public class AddDialogFragment extends AppCompatDialogFragment {
                         String paymenttype = null;
                         if (radioPay.isChecked()) {
                             paymenttype = "Paid";
+                            payment_type=1;
                         }
                         if (radioRecieve.isChecked()) {
                             paymenttype = "Recieved";
+                            payment_type=2;
                         }
                         String tofrom = edittofrom.getText().toString();
                         String title = edittitle.getText().toString();
                         String desc = editdescription.getText().toString();
+                        int result=on_net_balance();
+                        if(payment_type==0 && result==0){
+                            Toast.makeText(getContext(),"Payment type not mentioned",Toast.LENGTH_SHORT).show();
+                        }
 
-                        FileOutputStream fileOutputStream = null;
-                        try {
-                            Date c = Calendar.getInstance().getTime();
-                            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
-                            String formattedDate = df.format(c);
-                            fileOutputStream = getContext().openFileOutput(formattedDate+" ->  "+paymenttype + " " + txtamount + "rs.txt", Context.MODE_PRIVATE);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
+                        if(payment_type!=0 && result==1){
+                            FileOutputStream fileOutputStream = null;
+                            try {
+                                Date c = Calendar.getInstance().getTime();
+                                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+                                String formattedDate = df.format(c);
+                                fileOutputStream = getContext().openFileOutput(formattedDate+" ->  "+paymenttype + " " + txtamount + "rs.txt", Context.MODE_PRIVATE);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                            String data = "Title = " + title + "\nAmount paid = " + txtamount + "\nto/from = " + tofrom + "\n description = " + desc;
+                            try {
+                                assert fileOutputStream != null;
+                                fileOutputStream.write(data.getBytes());
+                                Toast.makeText(getContext(), "" + data, Toast.LENGTH_SHORT).show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                fileOutputStream.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
                         }
-                        String data = "Title = " + title + "\nAmount paid = " + txtamount + "\nto/from = " + tofrom + "\n description = " + desc;
-                        try {
-                            assert fileOutputStream != null;
-                            fileOutputStream.write(data.getBytes());
-                            Toast.makeText(getContext(), "" + data, Toast.LENGTH_SHORT).show();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            fileOutputStream.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+
 
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -117,6 +127,48 @@ public class AddDialogFragment extends AppCompatDialogFragment {
 
             }
         });
+    }
+
+    private int on_net_balance() {
+        int sucess=-1;
+        SharedPreferences sharedPreferences=getContext().getSharedPreferences("bankbalance",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        String net_amount=sharedPreferences.getString("netbalance","-1");
+        assert net_amount != null;
+        if(net_amount.equals("-1")){
+            Toast.makeText(getContext(),"something went wrong please restart",Toast.LENGTH_SHORT).show();
+            sucess=0;
+        }
+        else{
+            int net_calculation=Integer.parseInt(net_amount);
+            int useramount=Integer.parseInt(txtamount);
+            if(payment_type==1){
+                net_calculation=net_calculation-useramount;
+                if(net_calculation<0){
+                    Toast.makeText(getContext(),"Not enough balance you have",Toast.LENGTH_SHORT).show();
+                    sucess=0;
+                }
+                else{
+                    editor.putString("netbalance",""+net_calculation);
+                    editor.apply();
+                    sucess=1;
+                }
+            }
+            if(payment_type==2){
+                net_calculation=net_calculation+useramount;
+                editor.putString("netbalance",""+net_calculation);
+                editor.apply();
+                sucess=1;
+
+            }
+        }
+        if(sucess==1){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+
     }
 
     public void init() {
