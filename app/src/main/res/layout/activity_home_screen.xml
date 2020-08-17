@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeScreen">
-        <com.google.android.material.tabs.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tabs"
-            ></com.google.android.material.tabs.TabLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.google.android.material.tabs.TabLayout>
+
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tabs"
-        android:id="@+id/viewpager"
-        ></androidx.viewpager.widget.ViewPager>
+        android:layout_below="@id/tabs"></androidx.viewpager.widget.ViewPager>
 </RelativeLayout>

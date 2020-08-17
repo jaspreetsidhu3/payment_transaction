@@ -40,10 +40,10 @@ public class Bankfragment extends Fragment {
         creating_sharedpreference();
         final File file = getContext().getFilesDir();
         final File file1[] = file.listFiles();
-        filelinks=new ArrayList();
+        filelinks = new ArrayList();
 
         arrayList = new ArrayList();
-        for (int files_itr = file1.length-1; files_itr >=0; files_itr--) {
+        for (int files_itr = file1.length - 1; files_itr >= 0; files_itr--) {
             try {
                 arrayList.add(file1[files_itr].getCanonicalFile().toString().substring(file1[files_itr].toString().lastIndexOf("/") - 1));
             } catch (IOException e) {
@@ -51,9 +51,9 @@ public class Bankfragment extends Fragment {
             }
 
         }
-        for (int files_itr = file1.length-1; files_itr >=0; files_itr--) {
+        for (int files_itr = file1.length - 1; files_itr >= 0; files_itr--) {
 
-                filelinks.add(file1[files_itr].toString());
+            filelinks.add(file1[files_itr].toString());
 
 
         }
@@ -62,8 +62,8 @@ public class Bankfragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getContext(), DetailActivity.class);
-                intent.putExtra("detail",filelinks.get(position).toString());
+                Intent intent = new Intent(getContext(), DetailActivity.class);
+                intent.putExtra("detail", filelinks.get(position).toString());
 
                 startActivity(intent);
             }
@@ -76,17 +76,17 @@ public class Bankfragment extends Fragment {
         textbankamount = view.findViewById(R.id.bankamount);
         listView = view.findViewById(R.id.recylerview);
     }
-    public void creating_sharedpreference(){
-        SharedPreferences sharedPreferences=getContext().getSharedPreferences("bankbalance", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        String netamount=sharedPreferences.getString("netbalance","-1");
+
+    public void creating_sharedpreference() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("bankbalance", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String netamount = sharedPreferences.getString("netbalance", "-1");
         assert netamount != null;
-        if(netamount.equals("-1")){
-            editor.putString("netbalance","0");
+        if (netamount.equals("-1")) {
+            editor.putString("netbalance", "0");
             textbankamount.setText(netamount);
 
-        }
-        else{
+        } else {
             textbankamount.setText(netamount);
         }
 

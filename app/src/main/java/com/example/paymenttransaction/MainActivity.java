@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+
+//Splash Screen
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -16,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Thread.sleep(1500);
-                    startActivity(new Intent(getApplicationContext(),HomeScreen.class));
+                    startActivity(new Intent(getApplicationContext(), HomeScreen.class));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

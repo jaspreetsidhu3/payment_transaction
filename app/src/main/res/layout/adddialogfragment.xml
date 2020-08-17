@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:padding="4dp"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,22 +14,23 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/passamount"
             style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:text="Amount"
             android:textStyle="bold"
-            android:id="@+id/passamount"
-            android:layout_gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></TextView>
+
         <TextView
             style="@style/TextAppearance.AppCompat.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Amount"
             android:layout_gravity="center_horizontal"
+            android:text="Amount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></TextView>
@@ -38,53 +38,52 @@
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="12dp"
             android:layout_marginTop="34dp"
-            >
+            android:orientation="horizontal"
+            android:padding="12dp">
+
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pay"
-                android:layout_marginRight="34dp"
                 android:id="@+id/pay"
-                ></RadioButton>
-            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recieve"
+                android:layout_marginRight="34dp"
+                android:text="Pay"></RadioButton>
+
+            <RadioButton
                 android:id="@+id/recieve"
-                ></RadioButton>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recieve"></RadioButton>
         </RadioGroup>
+
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:hint="To/From"
-            android:layout_marginLeft="12dp"
-            android:background="@drawable/bg_drawable"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="12dp"
             android:id="@+id/tofrom"
-            ></EditText>
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:hint="Want to Title ?"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/bg_drawable"
             android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
             android:layout_marginRight="12dp"
+            android:background="@drawable/bg_drawable"
+            android:hint="To/From"></EditText>
+
+        <EditText
             android:id="@+id/wanttoaddtitle"
-            ></EditText>
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:hint="Want to Description ?"
-            android:background="@drawable/bg_drawable"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginRight="12dp"
+            android:background="@drawable/bg_drawable"
+            android:hint="Want to Title ?"></EditText>
+
+        <EditText
             android:id="@+id/wanttoadddescription"
-            ></EditText>
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/bg_drawable"
+            android:hint="Want to Description ?"></EditText>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

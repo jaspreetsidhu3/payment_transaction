@@ -1,54 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="19dp"
-        android:id="@+id/linearlayout"
         android:orientation="vertical"
+        android:padding="19dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Net Balance"
-            android:layout_gravity="center_horizontal"
             style="@style/TextAppearance.AppCompat.Small"
-            ></TextView>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Amount"
+            android:layout_gravity="center_horizontal"
+            android:text="Net Balance"></TextView>
+
+        <TextView
+            android:id="@+id/bankamount"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:padding="40dp"
-            android:id="@+id/bankamount"
             android:paddingTop="19dp"
-            android:textStyle="bold"
-            style="@style/TextAppearance.AppCompat.Large"
-            ></TextView>
+            android:text="Amount"
+            android:textStyle="bold"></TextView>
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Previous transaction"
-            android:paddingTop="19dp"
             android:id="@+id/header"
             style="@style/TextAppearance.AppCompat.Small"
-            ></TextView>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="19dp"
+            android:text="Previous transaction"></TextView>
+
         <ListView
+            android:id="@+id/recylerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/header"
             android:layout_marginTop="12dp"
-            android:id="@+id/recylerview"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            ></ListView>
+            app:layout_constraintTop_toBottomOf="@id/header"></ListView>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

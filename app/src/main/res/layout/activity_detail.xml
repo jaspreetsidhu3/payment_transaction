@@ -5,15 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Data detail"
-        style="@style/TextAppearance.AppCompat.Large"
-        android:gravity="center_horizontal|center_vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/detailtext"
-        ></TextView>
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="22dp"
+        android:gravity="left|center_horizontal"
+        android:text="Data detail"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+    <TextView
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:gravity="center_horizontal"
+        android:text="Payment Transaction"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/dev"></TextView>
+    <TextView
+        android:id="@+id/dev"
+        style="@style/TextAppearance.AppCompat.Small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="12dp"
+        android:gravity="center_horizontal"
+        android:text="Developed by Jaspreet"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>
