@@ -7,7 +7,7 @@
 1. Fork this project into your github repo</br>
 2. Clone project into local computer</br>
 3. Use Android Studio or VS Code to debug or install this app on your mobile phone</br>
-4. Enjoy and start making notes.
+
 
 ### Prerequisites
 * Android Studio or VS Code editor </br>
