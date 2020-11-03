@@ -1,5 +1,5 @@
 # Payment Transaction
-
+A android application where you can save your daily transaction.
 
 
 ## Getting Started
