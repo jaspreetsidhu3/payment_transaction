@@ -1,9 +1,11 @@
 package com.example.paymenttransaction;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,14 +14,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class DetailActivity extends AppCompatActivity {
-    private TextView textdetail;
+    private TextView textDetail;
     StringBuffer stringBuffer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        textdetail = findViewById(R.id.detailtext);
+        textDetail = findViewById(R.id.detailtext);
         String name = getIntent().getExtras().getString("detail", null);
         try {
             assert name != null;
@@ -38,6 +40,6 @@ public class DetailActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        textdetail.setText(stringBuffer);
+        textDetail.setText(stringBuffer);
     }
 }

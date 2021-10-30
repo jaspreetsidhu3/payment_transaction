@@ -38,6 +38,7 @@
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="34dp"
             android:orientation="horizontal"
             android:padding="12dp">
@@ -46,7 +47,6 @@
                 android:id="@+id/pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="34dp"
                 android:text="Pay"></RadioButton>
 
             <RadioButton
@@ -54,36 +54,54 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Recieve"></RadioButton>
+
+            <RadioButton
+                android:id="@+id/masteredit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Master change"></RadioButton>
         </RadioGroup>
 
-        <EditText
-            android:id="@+id/tofrom"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="12dp"
-            android:background="@drawable/bg_drawable"
-            android:hint="To/From"></EditText>
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/wanttoaddtitle"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="12dp"
-            android:background="@drawable/bg_drawable"
-            android:hint="Want to Title ?"></EditText>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/wanttoadddescription"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="12dp"
-            android:background="@drawable/bg_drawable"
-            android:hint="Want to Description ?"></EditText>
+                <EditText
+                    android:id="@+id/tofrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/bg_drawable"
+                    android:hint="To/From"></EditText>
+
+                <EditText
+                    android:id="@+id/wanttoaddtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/bg_drawable"
+                    android:hint="Want to Title ?"></EditText>
+
+                <EditText
+                    android:id="@+id/wanttoadddescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/bg_drawable"
+                    android:hint="Want to Description ?"></EditText>
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

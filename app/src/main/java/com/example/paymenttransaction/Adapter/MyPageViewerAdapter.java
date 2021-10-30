@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.paymenttransaction.Fragment.Addfragment;
-import com.example.paymenttransaction.Fragment.Bankfragment;
+import com.example.paymenttransaction.Fragment.AddFragment;
+import com.example.paymenttransaction.Fragment.BankFragment;
 
 
 public class MyPageViewerAdapter extends FragmentPagerAdapter {
@@ -25,10 +25,10 @@ public class MyPageViewerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                Addfragment addfragment = new Addfragment();
+                AddFragment addfragment = new AddFragment();
                 return addfragment;
             case 1:
-                Bankfragment bankfragment = new Bankfragment();
+                BankFragment bankfragment = new BankFragment();
                 return bankfragment;
             default:
                 return null;

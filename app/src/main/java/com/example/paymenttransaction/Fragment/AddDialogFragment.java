@@ -32,21 +32,22 @@ import java.util.Date;
 import java.util.Locale;
 
 public class AddDialogFragment extends AppCompatDialogFragment {
-    private TextView textamount;
+    private TextView textAmount;
     private RadioButton radioPay;
-    private RadioButton radioRecieve;
+    private RadioButton radioReceive;
+    private RadioButton radioMasterChange;
     private EditText edittofrom;
     private EditText edittitle;
-    private EditText editdescription;
+    private EditText editDescription;
     String formattedDate;
     int count;
     int payment_type = 0;
     AlertDialog.Builder builder;
     View view;
-    private String txtamount;
+    private String txtAmount;
 
-    public AddDialogFragment(String textamount) {
-        txtamount = textamount;
+    public AddDialogFragment(String textAmount) {
+        txtAmount = textAmount;
     }
 
     @NonNull
@@ -55,79 +56,84 @@ public class AddDialogFragment extends AppCompatDialogFragment {
         builder = new AlertDialog.Builder(getContext());
         view = LayoutInflater.from(getContext()).inflate(R.layout.adddialogfragment, null);
         init();
-        creating_dialogview();
-        textamount.setText(txtamount);
+        creatingDialogView();
+        textAmount.setText(txtAmount);
         return builder.create();
     }
 
-    public void creating_dialogview() {
+    public void creatingDialogView() {
         builder.setView(view)
                 .setTitle("Fill transaction details")
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SharedPreferences sharedPreferences = getContext().getSharedPreferences("id_generator", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        String key = sharedPreferences.getString("file_created", "-1");
-                        assert key != null;
-                        if (key.equals("-1")) {
-                            Log.d("test", "-1");
+                        if (!(radioPay.isChecked() || radioReceive.isChecked() || radioMasterChange.isChecked())) {
+                            Toast.makeText(getContext(), "Please select operation type", Toast.LENGTH_SHORT).show();
                         } else {
-                            count = Integer.parseInt(key);
-                            editor.putString("file_created", String.valueOf(++count));
-                            editor.apply();
-                        }
-                        String paymenttype = null;
-                        if (radioPay.isChecked()) {
-                            paymenttype = "Paid";
-                            payment_type = 1;
-                        }
-                        if (radioRecieve.isChecked()) {
-                            paymenttype = "Recieved";
-                            payment_type = 2;
-                        }
-                        String tofrom = edittofrom.getText().toString();
-                        String title = edittitle.getText().toString();
-                        String desc = editdescription.getText().toString();
-                        int result = on_net_balance();
-                        if (payment_type == 0 && result == 0) {
-                            Toast.makeText(getContext(), "Payment type not mentioned", Toast.LENGTH_SHORT).show();
-                        }
-
-                        if (payment_type != 0 && result == 1) {
-                            FileOutputStream fileOutputStream = null;
-                            try {
-                                Date c = Calendar.getInstance().getTime();
-                                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
-                                formattedDate = df.format(c);
-                                fileOutputStream = getContext().openFileOutput(formattedDate + " ->  " + paymenttype + " " + txtamount + "rs.txt", Context.MODE_PRIVATE);
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
+                            SharedPreferences sharedPreferences = getContext().getSharedPreferences("id_generator", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            String key = sharedPreferences.getString("file_created", "-1");
+                            assert key != null;
+                            if (key.equals("-1")) {
+                                Log.d("test", "-1");
+                            } else {
+                                count = Integer.parseInt(key);
+                                editor.putString("file_created", String.valueOf(++count));
+                                editor.apply();
                             }
-                            String data = "On data = "+formattedDate+"\nAmount "+paymenttype +" = " + txtamount + "\nto/from = " + tofrom+"\n\nTitle = " + title + "\nDescription = " + desc;
-                            try {
-                                assert fileOutputStream != null;
-                                fileOutputStream.write(data.getBytes());
-                                Toast.makeText(getContext(), "Done", Toast.LENGTH_SHORT).show();
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                            String paymenttype = null;
+                            if (radioPay.isChecked()) {
+                                paymenttype = "Paid";
+                                payment_type = 1;
                             }
-                            try {
-                                fileOutputStream.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                            if (radioReceive.isChecked()) {
+                                paymenttype = "Recieved";
+                                payment_type = 2;
+                            }
+                            if (radioMasterChange.isChecked()) {
+                                paymenttype = "Master Change";
+                                payment_type = 3;
+                            }
+                            String tofrom = edittofrom.getText().toString();
+                            String title = edittitle.getText().toString();
+                            String desc = editDescription.getText().toString();
+                            int result = on_net_balance();
+                            if (payment_type == 0 && result == 0) {
+                                Toast.makeText(getContext(), "Payment type not mentioned", Toast.LENGTH_SHORT).show();
                             }
 
+                            if (payment_type != 0 && result == 1) {
+                                FileOutputStream fileOutputStream = null;
+                                try {
+                                    Date c = Calendar.getInstance().getTime();
+                                    SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+                                    formattedDate = df.format(c);
+                                    fileOutputStream = getContext().openFileOutput(formattedDate + " ->  " + paymenttype + " " + txtAmount + "rs.txt", Context.MODE_PRIVATE);
+                                } catch (FileNotFoundException e) {
+                                    e.printStackTrace();
+                                }
+                                String data = "On data = " + formattedDate + "\nAmount " + paymenttype + " = " + txtAmount + "\nto/from = " + tofrom + "\n\nTitle = " + title + "\nDescription = " + desc;
+                                try {
+                                    assert fileOutputStream != null;
+                                    fileOutputStream.write(data.getBytes());
+                                    Toast.makeText(getContext(), "Done", Toast.LENGTH_SHORT).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    fileOutputStream.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
-
-
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-            }
-        });
+                    }
+                });
     }
 
     private int on_net_balance() {
@@ -140,8 +146,8 @@ public class AddDialogFragment extends AppCompatDialogFragment {
             Toast.makeText(getContext(), "something went wrong please restart", Toast.LENGTH_SHORT).show();
             sucess = 0;
         } else {
-            int net_calculation = Integer.parseInt(net_amount);
-            int useramount = Integer.parseInt(txtamount);
+            double net_calculation = Double.parseDouble(net_amount);
+            double useramount = Double.parseDouble(txtAmount);
             if (payment_type == 1) {
                 net_calculation = net_calculation - useramount;
                 if (net_calculation < 0) {
@@ -158,7 +164,12 @@ public class AddDialogFragment extends AppCompatDialogFragment {
                 editor.putString("netbalance", "" + net_calculation);
                 editor.apply();
                 sucess = 1;
-
+            }
+            if (payment_type == 3) {
+                net_calculation = useramount;
+                editor.putString("netbalance", "" + net_calculation);
+                editor.apply();
+                sucess = 1;
             }
         }
         if (sucess == 1) {
@@ -170,12 +181,13 @@ public class AddDialogFragment extends AppCompatDialogFragment {
     }
 
     public void init() {
-        textamount = view.findViewById(R.id.passamount);
+        textAmount = view.findViewById(R.id.passamount);
         radioPay = view.findViewById(R.id.pay);
-        radioRecieve = view.findViewById(R.id.recieve);
+        radioReceive = view.findViewById(R.id.recieve);
         edittofrom = view.findViewById(R.id.tofrom);
         edittitle = view.findViewById(R.id.wanttoaddtitle);
-        editdescription = view.findViewById(R.id.wanttoadddescription);
+        editDescription = view.findViewById(R.id.wanttoadddescription);
+        radioMasterChange = view.findViewById(R.id.masteredit);
     }
 }
 

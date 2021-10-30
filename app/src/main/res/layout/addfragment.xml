@@ -23,7 +23,7 @@
             android:background="@drawable/bg_drawable"
             android:backgroundTint="#88FFFFFF"
             android:hint="Enter the amount"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:paddingLeft="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -35,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Proceed"
+        android:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"></Button>

@@ -19,17 +19,17 @@ import androidx.fragment.app.Fragment;
 
 import com.example.paymenttransaction.R;
 
-public class Addfragment extends Fragment {
-    private Button btnproceeds;
-    private EditText fillamount;
+public class AddFragment extends Fragment {
+    private Button btnProceeds;
+    private EditText edtAmount;
     static int count = 0;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.addfragment, null);
-        btnproceeds = view.findViewById(R.id.proceed);
-        fillamount = view.findViewById(R.id.fillamount);
+        btnProceeds = view.findViewById(R.id.proceed);
+        edtAmount = view.findViewById(R.id.fillamount);
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("id_generator", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -41,16 +41,15 @@ public class Addfragment extends Fragment {
             Log.d("test", "test");
         }
         editor.apply();
-        btnproceeds.setOnClickListener(new View.OnClickListener() {
+        btnProceeds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(fillamount.getText())) {
+                if (TextUtils.isEmpty(edtAmount.getText())) {
                     Toast.makeText(getContext(), "Please fill amount for further proceeder", Toast.LENGTH_SHORT).show();
                 } else {
-                    AddDialogFragment addDialogFragment = new AddDialogFragment(fillamount.getText().toString());
+                    AddDialogFragment addDialogFragment = new AddDialogFragment(edtAmount.getText().toString());
                     addDialogFragment.show(getFragmentManager(), "Detail dialog");
                 }
-
             }
         });
         return view;

@@ -22,13 +22,17 @@ import com.example.paymenttransaction.R;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class Bankfragment extends Fragment {
-    private TextView textbankamount;
+public class BankFragment extends Fragment {
+    private TextView textBankAmount;
     private ListView listView;
     private ArrayList arrayList;
-    private ArrayList filelinks;
+    private ArrayList fileLinks;
     View view;
 
     @Nullable
@@ -40,7 +44,7 @@ public class Bankfragment extends Fragment {
         creating_sharedpreference();
         final File file = getContext().getFilesDir();
         final File file1[] = file.listFiles();
-        filelinks = new ArrayList();
+        fileLinks = new ArrayList();
 
         arrayList = new ArrayList();
         for (int files_itr = file1.length - 1; files_itr >= 0; files_itr--) {
@@ -53,7 +57,7 @@ public class Bankfragment extends Fragment {
         }
         for (int files_itr = file1.length - 1; files_itr >= 0; files_itr--) {
 
-            filelinks.add(file1[files_itr].toString());
+            fileLinks.add(file1[files_itr].toString());
 
 
         }
@@ -63,7 +67,7 @@ public class Bankfragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DetailActivity.class);
-                intent.putExtra("detail", filelinks.get(position).toString());
+                intent.putExtra("detail", fileLinks.get(position).toString());
 
                 startActivity(intent);
             }
@@ -73,7 +77,7 @@ public class Bankfragment extends Fragment {
     }
 
     public void init() {
-        textbankamount = view.findViewById(R.id.bankamount);
+        textBankAmount = view.findViewById(R.id.bankamount);
         listView = view.findViewById(R.id.recylerview);
     }
 
@@ -84,10 +88,16 @@ public class Bankfragment extends Fragment {
         assert netamount != null;
         if (netamount.equals("-1")) {
             editor.putString("netbalance", "0");
-            textbankamount.setText(netamount);
+            textBankAmount.setText(netamount);
 
         } else {
-            textbankamount.setText(netamount);
+            Locale locale = new Locale("en", "IN");
+            DecimalFormat decimalFormat = (DecimalFormat) DecimalFormat.getCurrencyInstance(locale);
+            DecimalFormatSymbols dfs = DecimalFormatSymbols.getInstance(locale);
+            dfs.setCurrencySymbol("\u20B9");
+            decimalFormat.setDecimalFormatSymbols(dfs);
+            String formattedAmount = decimalFormat.format(Double.parseDouble(netamount));
+            textBankAmount.setText(formattedAmount);
         }
 
         editor.apply();
