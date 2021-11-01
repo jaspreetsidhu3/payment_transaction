@@ -1,6 +1,8 @@
-# Payment Transaction
+<div align="center">
+ <img src="Screenshots/e-wallet.png" width="25%" />
+<h1>Payment Transaction</h1>
 A android application where you can save your daily transaction.
-
+</div>
 
 ## Getting Started
 
@@ -17,31 +19,14 @@ A android application where you can save your daily transaction.
 
 ## Screenshots
 
-* Splash screen
+<div align="left">
 <img src="Screenshots/1 (1).jpg" width=200 height=400 />
-
-* Home screen
 <img src="Screenshots/1 (2).jpg" width=200 height=400 />
-
-* Payment mode
-
-
 <img src="Screenshots/1 (3).jpg" width=200 height=400 />
-
-
-
-
-* Total money / Transaction details
-
-
 <img src="Screenshots/1 (4).jpg" width=200 height=400 />
-
-
-* Transaction detail
-
-
 <img src="Screenshots/1 (5).jpg" width=200 height=400 />
-
+<img src="Screenshots/1 (6).jpg" width=200 height=400 />
+</div>
 
 ## Built With
 
