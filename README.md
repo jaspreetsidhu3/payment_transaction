@@ -31,13 +31,9 @@ A android application where you can save your daily transaction.
 ## Built With
 
 * Android Studio
-* Love
 
 ## Language implementation
 * Java
-## Storage type
-* Internal Storage
-* Shared Preferences
 
 ## Version
 * v1.0
